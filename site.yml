@@ -1,0 +1,8 @@
+---
+
+- hosts: tater
+  roles:
+    - common
+    - tater
+  sudo: yes
+

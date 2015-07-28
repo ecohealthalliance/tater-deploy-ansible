@@ -1,0 +1,12 @@
+---
+
+tater_checkout_destination: /home/tater/tater
+tater_branch: master
+mongo_url: localhost
+meteor_port: 3001
+meteor_db_name: tater
+mongo_host: localhost
+mongo_port: 27017
+meteor_mongo: "mongodb://{{mongo_host}}:{{mongo_port}}/{{ meteor_db_name }}"
+nodejs_version: v0.10.40
+root_url: http://localhost

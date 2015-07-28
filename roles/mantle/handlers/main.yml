@@ -1,0 +1,8 @@
+---
+
+  - name: restart tater
+    supervisorctl: name=tater state=restarted
+    sudo: yes
+
+  - name: restart supervisor
+    service: name=supervisor state=restarted

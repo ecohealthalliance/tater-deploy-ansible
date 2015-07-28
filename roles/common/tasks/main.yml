@@ -1,0 +1,35 @@
+---
+
+  - name: Install common packages from apt
+    apt: pkg={{item}} state=installed update_cache=yes
+    sudo: True
+    with_items:
+      - git
+      - supervisor
+
+  - name: Create tater group
+    user: name=tater
+
+  - name: Create tater user
+    user: name=tater group=tater shell=/bin/bash
+
+  - name: Install meteor
+    shell: curl https://install.meteor.com/ | sh
+    sudo: yes
+    args:
+      creates: /usr/local/bin/meteor
+
+  - name: Install nvm for tater user
+    shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
+    sudo: yes
+    sudo_user: tater
+    args:
+      creates: /home/tater/.nvm
+
+  - name: Install nodejs for tater user
+    shell: ". ~/.nvm/nvm.sh && nvm install {{ nodejs_version }} && nvm alias default {{ nodejs_version }}"
+    sudo: yes
+    sudo_user: tater
+    args:
+      executable: /bin/bash
+

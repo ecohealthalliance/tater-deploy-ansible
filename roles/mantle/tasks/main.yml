@@ -1,0 +1,55 @@
+---
+
+  - name: Sync tater code
+    git: 
+      repo: https://github.com/ecohealthalliance/tater.git
+      dest: "{{ tater_checkout_destination }}"
+      accept_hostkey: yes
+      version: "{{ tater_branch }}"
+      depth: 1
+      force: yes
+    notify: restart tater
+    register: tater
+
+  - file: path="{{ tater_checkout_destination }}/build" state=absent
+    when: tater.changed
+
+  - file: path="{{ tater_checkout_destination }}/bundle" state=absent
+    when: tater.changed
+  
+  - file: path=/home/tater owner=tater group=tater recurse=yes
+
+  - name: Meteor build
+    shell: meteor build build
+    sudo: yes
+    sudo_user: tater
+    args:
+      creates: "{{ tater_checkout_destination }}/build/tater.tar.gz"
+      chdir: "{{ tater_checkout_destination }}"
+
+  - name: Extract build tarball
+    shell: "tar -zxf {{ tater_checkout_destination }}/build/tater.tar.gz"
+    args:
+      chdir: "{{ tater_checkout_destination }}"
+    sudo: yes
+    sudo_user: tater   
+
+  - name: Install npm modules
+    shell: "/home/tater/.nvm/{{ nodejs_version }}/bin/npm install"
+    args:
+      chdir: "{{ tater_checkout_destination }}/bundle/programs/server"
+    sudo: yes
+    sudo_user: tater
+
+  - name: Install supervisord config
+    template: src=tater.conf.j2 dest=/etc/supervisor/conf.d/tater.conf
+    sudo: yes
+    sudo_user: root
+    notify: restart supervisor
+
+  - file: path="{{ tater_checkout_destination }}/.meteor/local/db" state=directory owner=tater group=tater
+
+  - name: Start tater
+    supervisorctl: name="tater" state=started
+    sudo: yes
+    sudo_user: root
