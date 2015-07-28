@@ -5,4 +5,5 @@
     - common
     - tater
   sudo: yes
-
+  vars_files:
+    - secure.yml

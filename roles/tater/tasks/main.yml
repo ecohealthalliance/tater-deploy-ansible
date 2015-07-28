@@ -2,12 +2,13 @@
 
   - name: Sync tater code
     git: 
-      repo: https://github.com/ecohealthalliance/tater.git
+      repo: git@github.com:ecohealthalliance/tater.git
       dest: "{{ tater_checkout_destination }}"
       accept_hostkey: yes
       version: "{{ tater_branch }}"
       depth: 1
       force: yes
+      key_file: /home/tater/.ssh/id_rsa
     notify: restart tater
     register: tater
 

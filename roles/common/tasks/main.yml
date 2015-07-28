@@ -13,6 +13,12 @@
   - name: Create tater user
     user: name=tater group=tater shell=/bin/bash
 
+  - name: Create .ssh directory
+    file: path=/home/tater/.ssh group=tater owner=tater state=directory mode="0744"
+    
+  - name: Create github key
+    copy: content="{{ tater_deploy_key }}" dest=/home/tater/.ssh/id_rsa mode="0600" owner=tater group=tater
+
   - name: Install meteor
     shell: curl https://install.meteor.com/ | sh
     sudo: yes
