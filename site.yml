@@ -4,6 +4,7 @@
   roles:
     - common
     - tater
+    - apache
   sudo: yes
   vars_files:
     - secure.yml
