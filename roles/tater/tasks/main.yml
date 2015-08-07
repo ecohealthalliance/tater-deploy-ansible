@@ -12,6 +12,11 @@
     notify: restart tater
     register: tater
 
+  - name: Copy tater logo to custom error web directory
+    shell: "cp {{ tater_checkout_destination }}/public/images/tater-logo.png /var/www/deploying/"
+    sudo: yes
+    sudo_user: root
+
   - file: path="{{ tater_checkout_destination }}/build" state=absent
     when: tater.changed
 
