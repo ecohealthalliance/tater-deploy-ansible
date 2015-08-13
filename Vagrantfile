@@ -5,6 +5,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.network "forwarded_port", guest: 3001, host: 3001
   config.vm.network "forwarded_port", guest: 443, host: 8443
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
@@ -21,7 +22,7 @@ Vagrant.configure(2) do |config|
     sudo echo "localhost ansible_connection=local" >> /etc/ansible/hosts
     sudo echo "[tater]" >> /etc/ansible/hosts
     sudo echo "localhost ansible_connection=local" >> /etc/ansible/hosts
-    echo "Running ansible playbook ************************************************************"
-    sudo ansible-playbook /vagrant/site.yml
+    echo "To run the ansible playbook ssh into the vm with 'vagrant ssh' and run this command:"
+    echo "sudo ansible-playbook /vagrant/site.yml --ask-vault-pass"
   SHELL
 end

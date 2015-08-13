@@ -3,8 +3,8 @@
 - hosts: tater
   roles:
     - common
-    - tater
     - apache
+    - tater
   sudo: yes
   vars_files:
     - secure.yml

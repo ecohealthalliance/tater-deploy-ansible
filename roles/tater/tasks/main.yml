@@ -47,6 +47,12 @@
     sudo: yes
     sudo_user: tater
 
+  - file: path="/usr/local/bin/mongod" state=absent
+
+  - name: Symlink latest installed mongod binary
+    shell: "ln -s $(find /home/ -name mongod | sort | tail -1) /usr/local/bin/mongod;"
+    sudo: yes
+
   - name: Install supervisord config
     template: src=tater.conf.j2 dest=/etc/supervisor/conf.d/tater.conf
     sudo: yes
