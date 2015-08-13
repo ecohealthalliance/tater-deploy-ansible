@@ -5,6 +5,7 @@
     - common
     - apache
     - tater
+    - backup
   sudo: yes
   vars_files:
     - secure.yml
