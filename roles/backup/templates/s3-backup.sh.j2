@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rm -fr /tmp/tater-dump
+mkdir -p /tmp/tater-dump
+cd /tmp/tater-dump
+mongodump --db tater
+aws s3 cp --recursive dump s3://tater-data/{{ s3_dump_dir }}
+echo "Tater to S3 dump completed on `date`"

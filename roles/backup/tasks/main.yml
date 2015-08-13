@@ -1,0 +1,24 @@
+---
+
+  - pip: name=awscli
+
+  - apt: name="mongodb-clients"
+
+  - file: path="/home/tater/.aws" state=directory owner=tater group=tater mode=0755
+
+  - name: s3 config file
+    template: src=config.j2 dest=/home/tater/.aws/config owner=tater group=tater
+
+  - file: path="/home/tater/cron-scripts" state=directory owner=tater group=tater
+
+  - name: s3 backup script
+    template: src=s3-backup.sh.j2 dest=/home/tater/cron-scripts/s3-backup.sh owner=tater group=tater mode=0755
+
+  - cron:
+      user="tater"
+      name="Run s3-backup.sh"
+      minute="0"
+      hour="3"
+      job="/home/tater/cron-scripts/s3-backup.sh > /home/tater/s3-backup.log 2>&1"
+
+

@@ -1,2 +1,3 @@
 ---
 apache_url: https://tater-dev.ecohealth.io
+s3_dump_dir: dev

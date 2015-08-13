@@ -1,2 +1,3 @@
 ---
 apache_url: https://tater.ecohealthalliance.org
+s3_dump_dir: prod
