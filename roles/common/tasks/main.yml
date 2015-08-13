@@ -6,6 +6,7 @@
     with_items:
       - git
       - supervisor
+      - python-pip
 
   - name: Create tater group
     user: name=tater
