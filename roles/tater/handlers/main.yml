@@ -5,4 +5,4 @@
     sudo: yes
 
   - name: restart supervisor
-    service: name=supervisor state=restarted
+    shell: "service supervisor stop; sleep 10; service supervisor start"
