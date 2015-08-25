@@ -16,7 +16,8 @@ ServerName {{ apache_url }}
   DocumentRoot /var/www/deploying/
 </VirtualHost>
 
-<VirtualHost *:443>
+Listen 8443
+<VirtualHost *:443 *:8443>
   ProxyPreserveHost On
   RewriteEngine on
   RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC]
