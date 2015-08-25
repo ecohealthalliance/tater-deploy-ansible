@@ -9,5 +9,5 @@ mongo_host: localhost
 mongo_port: 27017
 meteor_mongo: "mongodb://{{mongo_host}}:{{mongo_port}}/{{ meteor_db_name }}"
 nodejs_version: v0.10.40
-root_url: http://localhost
 s3_dump_dir: local-test
+root_url: https://localhost
