@@ -1,3 +1,4 @@
 ---
 apache_url: https://localhost
 ddp_url: https://localhost:8443
+mongo_url: mongodb://52.21.199.95:27017/tater-dev

@@ -1,16 +1,16 @@
-[program:mongo]                                                                
+[program:mongo]
 command=/usr/local/bin/mongod --bind_ip 127.0.0.1 --smallfiles --port 27017 --dbpath /home/tater/tater/.meteor/local/db --oplogSize 8
-autostart=true                                                                 
-autorestart=unexpected                                                         
+autostart=false
+autorestart=unexpected
 exitcodes=1
-redirect_stderr=true                                                           
+redirect_stderr=true
 logfile_maxbytes=150MB
 logfile_backups=10
 startsecs=10
 
 [program:tater]
 command=/home/tater/.nvm/{{ nodejs_version }}/bin/node {{ tater_checkout_destination }}/bundle/main.js
-environment=METEOR_DB_NAME="{{ meteor_db_name }}",MONGO_URL="{{ meteor_mongo }}",PORT="{{ meteor_port }}",ROOT_URL="{{ root_url }}",DDP_DEFAULT_CONNECTION_URL="{{ ddp_url }}"
+environment=METEOR_DB_NAME="{{meteor_db_name}}",MONGO_URL="{{meteor_mongo}}",PORT="{{meteor_port}}",ROOT_URL="{{root_url}}",DDP_DEFAULT_CONNECTION_URL="{{ddp_url}}",MONGO_URL="{{mongo_url}}"
 directory={{ tater_checkout_destination }}
 user=tater
 numprocs=1
@@ -19,5 +19,5 @@ autorestart=unexpected
 startsecs=10
 logfile_maxbytes=150MB
 logfile_backups=10
-redirect_stderr=true                                                           
+redirect_stderr=true
 
