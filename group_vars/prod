@@ -1,4 +1,6 @@
 ---
 apache_url: https://tater.ecohealthalliance.org
 ddp_url: https://tater.ecohealthalliance.org:8443
+mongo_url: "mongodb://172.30.0.36:27017/tater-prod"
 s3_dump_dir: prod
+
