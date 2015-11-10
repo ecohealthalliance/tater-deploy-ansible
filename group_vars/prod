@@ -2,3 +2,4 @@
 apache_url: https://tater.ecohealthalliance.org
 ddp_url: https://tater.ecohealthalliance.org:8443
 s3_dump_dir: prod
+root_url: https://tater.ecohealthalliance.org
