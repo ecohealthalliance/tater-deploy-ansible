@@ -11,6 +11,13 @@
     notify: restart tater
     register: tater
 
+  - name: "Creating git revision.txt file"
+    shell: 'git log -1 --format="%H : %ai" > revision.txt'
+    args:
+      creates: "{{ tater_checkout_destination }}/revision.txt"
+      chdir: "{{ tater_checkout_destination }}"
+    when: tater.changed
+
   - name: Copy tater logo to custom error web directory
     shell: "cp {{ tater_checkout_destination }}/public/images/tater-logo.png /var/www/deploying/"
     sudo: yes
